@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 import type { PropsWithChildren } from "react";
 
 type TooltipProps = PropsWithChildren<{

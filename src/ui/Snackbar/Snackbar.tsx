@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 type SnackbarItem = {
   id: number;
   title?: string;

@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;

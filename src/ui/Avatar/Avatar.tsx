@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 type AvatarProps = {
   name: string;
   src?: string;

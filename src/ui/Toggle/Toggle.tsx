@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 type ToggleProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;

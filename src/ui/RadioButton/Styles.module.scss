@@ -1,0 +1,52 @@
+.radio {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+  width: fit-content;
+  cursor: pointer;
+  color: var(--text);
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &:checked + .radio__dot {
+      border-color: var(--pink-500);
+
+      &::after {
+        transform: scale(1);
+      }
+    }
+
+    &:focus-visible + .radio__dot {
+      box-shadow: var(--focus);
+    }
+  }
+
+  &:hover &__dot {
+    border-color: var(--pink-300);
+  }
+
+  &__dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    transition: 0.16s ease;
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--pink-600);
+      transform: scale(0);
+      transition: transform 0.16s ease;
+    }
+  }
+}

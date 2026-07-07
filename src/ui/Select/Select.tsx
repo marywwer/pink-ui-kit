@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 import { useEffect, useRef, useState } from "react";
 
 type Option = {

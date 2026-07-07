@@ -1,0 +1,70 @@
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 18px;
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 750;
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease,
+    border-color 0.16s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--pink-600);
+    outline-offset: 3px;
+    box-shadow: var(--focus);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+    box-shadow: none;
+  }
+
+  &--primary {
+    color: #fff;
+    background: linear-gradient(180deg, var(--pink-500), var(--pink-600));
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(180deg, #e25b8e, #881e47);
+    }
+
+    &:focus:not(:disabled) {
+      background: #7e204c;
+    }
+  }
+
+  &--secondary {
+    color: var(--pink-700);
+    background: #fff;
+    border: 1px solid var(--line);
+
+    &:hover:not(:disabled) {
+      background: var(--pink-50);
+      border-color: var(--pink-300);
+    }
+
+    &:focus:not(:disabled) {
+      background: var(--pink-100);
+    }
+  }
+
+  &--ghost {
+    color: var(--pink-700);
+    background: transparent;
+
+    &:hover:not(:disabled) {
+      background: rgba(217, 77, 130, 0.08);
+    }
+
+    &:focus:not(:disabled) {
+      background: var(--pink-100);
+    }
+  }
+}

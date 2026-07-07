@@ -1,3 +1,5 @@
+import "./Styles.module.scss";
+
 type RadioButtonProps = {
   name: string;
   value: string;

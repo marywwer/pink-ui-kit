@@ -1,0 +1,45 @@
+.field {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #5f424e;
+  }
+
+  &__input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 14px;
+    border-radius: 15px;
+    border: 1px solid var(--line);
+    color: var(--text);
+    background: #fff;
+    transition:
+      border-color 0.16s ease,
+      box-shadow 0.16s ease,
+      background 0.16s ease;
+
+    &:hover:not(:disabled) {
+      border-color: var(--pink-300);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--pink-500);
+      box-shadow: var(--focus);
+    }
+
+    &:disabled {
+      background: #f8edf2;
+      cursor: not-allowed;
+    }
+  }
+
+  &__helper {
+    color: var(--muted);
+    line-height: 1.4;
+  }
+}

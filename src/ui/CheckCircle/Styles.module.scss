@@ -1,0 +1,49 @@
+.check-circle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 6px;
+  border-radius: 999px;
+
+  span {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: transparent;
+    font-weight: 900;
+    transition: 0.16s ease;
+  }
+
+  em {
+    font-style: normal;
+  }
+
+  &:hover:not(:disabled) span {
+    border-color: var(--pink-300);
+    background: var(--pink-50);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus);
+  }
+
+  &.is-checked span {
+    color: white;
+    background: var(--pink-500);
+    border-color: var(--pink-500);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
