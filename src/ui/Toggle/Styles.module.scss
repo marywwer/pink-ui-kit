@@ -5,7 +5,7 @@
   margin: 10px 0;
   width: fit-content;
   cursor: pointer;
-  color: var(--text);
+  color: var(--text, #1a1a1a);
 
   input {
     position: absolute;
@@ -13,7 +13,7 @@
     pointer-events: none;
 
     &:checked + .toggle__track {
-      background: var(--pink-500);
+      background: var(--pink-500, #d9437a);
 
       .toggle__thumb {
         transform: translateX(22px);
@@ -21,11 +21,11 @@
     }
 
     &:focus-visible + .toggle__track {
-      box-shadow: var(--focus);
+      box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
     }
   }
 
-  &:hover:not(.is-disabled) {
+  &:hover:not(.isDisabled) {
     .toggle__track {
       background: #e8c4d2;
       box-shadow: 0 8px 18px rgba(151, 40, 80, 0.12);
@@ -36,12 +36,17 @@
     }
 
     input:checked + .toggle__track {
-      background: var(--pink-600);
+      background: var(--pink-600, #b83268);
 
       .toggle__thumb {
         transform: translateX(21px);
       }
     }
+  }
+
+  &.isDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &__track {
@@ -65,4 +70,9 @@
     box-shadow: 0 3px 10px rgba(45, 32, 37, 0.18);
     transition: transform 0.16s ease;
   }
+}
+
+.controlLabel {
+  font-size: 15px;
+  line-height: 1.4;
 }

@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type SnackbarItem = {
   id: number;
@@ -14,11 +14,11 @@ type SnackbarProps = {
 
 export function Snackbar({ items, onClose }: SnackbarProps) {
   return (
-    <div className="snackbar-stack" aria-live="polite" aria-atomic="false">
+    <div className={styles.snackbarStack} aria-live="polite" aria-atomic="false">
       {items.map((item) => (
         <div
           key={item.id}
-          className={`snackbar is-open ${item.leaving ? "is-leaving" : ""}`}
+          className={`${styles.snackbar} ${styles.isOpen} ${item.leaving ? styles.isLeaving : ""}`}
           role="status"
         >
           <div>

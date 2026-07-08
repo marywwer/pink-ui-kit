@@ -1,11 +1,16 @@
-.select-field {
+.selectField {
   display: grid;
   gap: 8px;
   margin: 12px 0;
 }
 
-.custom-select {
+.customSelect {
   position: relative;
+
+  &.isDisabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
   &__button {
     width: 100%;
@@ -16,8 +21,8 @@
     gap: 12px;
     padding: 0 14px;
     border-radius: 15px;
-    border: 1px solid var(--line);
-    color: var(--text);
+    border: 1px solid var(--line, #e2d0d8);
+    color: var(--text, #1a1a1a);
     background: #fff;
     cursor: pointer;
     transition:
@@ -26,15 +31,15 @@
       background 0.16s ease;
 
     &:hover:not(:disabled) {
-      border-color: var(--pink-300);
+      border-color: var(--pink-300, #e8a0bc);
       background: #fffafd;
     }
 
     &:focus-visible,
-    &.is-open {
+    &.isOpen {
       outline: none;
-      border-color: var(--pink-500);
-      box-shadow: var(--focus);
+      border-color: var(--pink-500, #d9437a);
+      box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
     }
 
     &:disabled {
@@ -42,7 +47,7 @@
       cursor: not-allowed;
     }
 
-    &.is-open .custom-select__chevron {
+    &.isOpen .customSelect__chevron {
       transform: rotate(225deg) translateY(-2px);
     }
   }
@@ -50,8 +55,8 @@
   &__chevron {
     width: 9px;
     height: 9px;
-    border-right: 2px solid var(--pink-600);
-    border-bottom: 2px solid var(--pink-600);
+    border-right: 2px solid var(--pink-600, #b83268);
+    border-bottom: 2px solid var(--pink-600, #b83268);
     transform: rotate(45deg) translateY(-2px);
     transition: transform 0.16s ease;
   }
@@ -80,7 +85,7 @@
     border: 0;
     border-radius: 12px;
     text-align: left;
-    color: var(--text);
+    color: var(--text, #1a1a1a);
     background: transparent;
     cursor: pointer;
     transition:
@@ -90,16 +95,22 @@
     &:hover,
     &:focus-visible {
       outline: none;
-      background: var(--pink-50);
-      color: var(--pink-700);
+      background: var(--pink-50, #fce4ed);
+      color: var(--pink-700, #7e204c);
     }
 
-    &.is-selected {
+    &.isSelected {
       background: #f7d4e0;
-      color: var(--pink-700);
+      color: var(--pink-700, #7e204c);
       font-weight: 800;
     }
   }
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #5f424e;
 }
 
 @keyframes selectDrop {

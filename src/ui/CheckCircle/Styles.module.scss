@@ -1,11 +1,11 @@
-.check-circle {
+.checkCircle {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   border: 0;
   background: transparent;
   cursor: pointer;
-  color: var(--muted);
+  color: var(--muted, #7d5265);
   padding: 6px;
   border-radius: 999px;
 
@@ -15,7 +15,7 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line, #e2d0d8);
     background: #fff;
     color: transparent;
     font-weight: 900;
@@ -27,19 +27,19 @@
   }
 
   &:hover:not(:disabled) span {
-    border-color: var(--pink-300);
-    background: var(--pink-50);
+    border-color: var(--pink-300, #e8a0bc);
+    background: var(--pink-50, #fce4ed);
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: var(--focus);
+    box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
   }
 
-  &.is-checked span {
+  &.isChecked span {
     color: white;
-    background: var(--pink-500);
-    border-color: var(--pink-500);
+    background: var(--pink-500, #d9437a);
+    border-color: var(--pink-500, #d9437a);
   }
 
   &:disabled {

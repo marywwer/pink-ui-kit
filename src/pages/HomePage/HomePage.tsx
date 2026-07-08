@@ -1,26 +1,26 @@
 import { Link } from 'react-router-dom';
-import { Avatar } from '../../ui/Avatar/Avatar';
-import { Button } from '../../ui/Button/Button';
-import { Tooltip } from '../../ui/Tooltip/Tooltip';
+import { Avatar } from '../../ui/Avatar';
+import { Button } from '../../ui/Button';
+import { Tooltip } from '../../ui/Tooltip';
 import { useAuth } from '../../store/auth/AuthContext';
-import './HomePage.scss';
+import styles from './Styles.module.scss';
 
 export const HomePage = () => {
   const { isAuth, user, logout } = useAuth();
 
   return (
-    <main className="home-page">
-      <section className="home-page__hero">
-        <p className="home-page__eyebrow">Pink Market</p>
+    <main className={styles.homePage}>
+      <section className={styles.hero}>
+        <p className={styles.eyebrow}>Pink Market</p>
 
         <h1>Интернет-магазин красивых штук</h1>
 
-        <p className="home-page__text">
+        <p className={styles.text}>
           Пока не придумала ничего интересного, поэтому просто приветствую.
         </p>
 
         {isAuth && user && (
-          <div className="home-page__user">
+          <div className={styles.user}>
             <Avatar name={user.name || 'User'} size="md" status="online" />
 
             <div>
@@ -30,7 +30,7 @@ export const HomePage = () => {
           </div>
         )}
 
-        <div className="home-page__actions">
+        <div className={styles.actions}>
           {isAuth ? (
             <>
               <Link to="/profile">Личный кабинет</Link>

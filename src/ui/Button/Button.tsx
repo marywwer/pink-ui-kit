@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
@@ -14,8 +14,13 @@ export function Button({
   className = "",
   ...props
 }: ButtonProps) {
+  const variantClass = styles[`btn--${variant}`];
+  
   return (
-    <button className={`btn btn--${variant} ${className}`} {...props}>
+    <button 
+      className={`${styles.btn} ${variantClass} ${className}`} 
+      {...props}
+    >
       {children}
     </button>
   );

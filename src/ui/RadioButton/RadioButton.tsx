@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type RadioButtonProps = {
   name: string;
@@ -18,7 +18,7 @@ export function RadioButton({
   disabled,
 }: RadioButtonProps) {
   return (
-    <label className={`radio ${disabled ? "is-disabled" : ""}`}>
+    <label className={`${styles.radio} ${disabled ? styles.isDisabled : ""}`}>
       <input
         type="radio"
         name={name}
@@ -27,8 +27,8 @@ export function RadioButton({
         disabled={disabled}
         onChange={() => onChange(value)}
       />
-      <span className="radio__dot" aria-hidden="true" />
-      <span className="control-label">{label}</span>
+      <span className={styles.radio__dot} aria-hidden="true" />
+      <span className={styles.controlLabel}>{label}</span>
     </label>
   );
 }

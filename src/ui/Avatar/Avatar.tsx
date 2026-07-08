@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type AvatarProps = {
   name: string;
@@ -15,12 +15,19 @@ export function Avatar({ name, src, size = "md", status }: AvatarProps) {
     .map((part) => part[0]?.toUpperCase())
     .join("");
 
+  const sizeClass = styles[`avatar--${size}`];
+  const statusClass = status ? styles[`avatar__status--${status}`] : undefined;
+
   return (
-    <div className={`avatar avatar--${size}`} aria-label={name} title={name}>
+    <div 
+      className={`${styles.avatar} ${sizeClass}`} 
+      aria-label={name} 
+      title={name}
+    >
       {src ? <img src={src} alt={name} /> : <span>{initials}</span>}
       {status && (
         <i
-          className={`avatar__status avatar__status--${status}`}
+          className={`${styles.avatar__status} ${statusClass}`}
           aria-hidden="true"
         />
       )}

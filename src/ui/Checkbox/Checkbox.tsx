@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type CheckboxProps = {
   checked: boolean;
@@ -14,17 +14,17 @@ export function Checkbox({
   disabled,
 }: CheckboxProps) {
   return (
-    <label className={`checkbox ${disabled ? "is-disabled" : ""}`}>
+    <label className={`${styles.checkbox} ${disabled ? styles.isDisabled : ""}`}>
       <input
         type="checkbox"
         checked={checked}
         disabled={disabled}
         onChange={(event) => onChange(event.target.checked)}
       />
-      <span className="checkbox__box" aria-hidden="true">
+      <span className={styles.checkbox__box} aria-hidden="true">
         ✓
       </span>
-      <span className="control-label">{label}</span>
+      <span className={styles.controlLabel}>{label}</span>
     </label>
   );
 }

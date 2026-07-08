@@ -5,7 +5,7 @@
   margin: 10px 0;
   width: fit-content;
   cursor: pointer;
-  color: var(--text);
+  color: var(--text, #1a1a1a);
 
   input {
     position: absolute;
@@ -13,7 +13,7 @@
     pointer-events: none;
 
     &:checked + .radio__dot {
-      border-color: var(--pink-500);
+      border-color: var(--pink-500, #d9437a);
 
       &::after {
         transform: scale(1);
@@ -21,19 +21,29 @@
     }
 
     &:focus-visible + .radio__dot {
-      box-shadow: var(--focus);
+      box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
     }
   }
 
-  &:hover &__dot {
-    border-color: var(--pink-300);
+  &:hover .radio__dot {
+    border-color: var(--pink-300, #e8a0bc);
+  }
+
+  &.isDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .radio__dot {
+      background: #f0e8ec;
+      border-color: #d0c4ca;
+    }
   }
 
   &__dot {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line, #e2d0d8);
     background: #fff;
     display: grid;
     place-items: center;
@@ -44,9 +54,14 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--pink-600);
+      background: var(--pink-600, #b83268);
       transform: scale(0);
       transition: transform 0.16s ease;
     }
   }
+}
+
+.controlLabel {
+  font-size: 15px;
+  line-height: 1.4;
 }

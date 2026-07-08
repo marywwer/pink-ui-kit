@@ -5,7 +5,7 @@
   margin: 10px 0;
   width: fit-content;
   cursor: pointer;
-  color: var(--text);
+  color: var(--text, #1a1a1a);
 
   input {
     position: absolute;
@@ -13,18 +13,28 @@
     pointer-events: none;
 
     &:checked + .checkbox__box {
-      background: var(--pink-500);
-      border-color: var(--pink-500);
+      background: var(--pink-500, #d9437a);
+      border-color: var(--pink-500, #d9437a);
       color: #fff;
     }
 
     &:focus-visible + .checkbox__box {
-      box-shadow: var(--focus);
+      box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
     }
   }
 
-  &:hover &__box {
-    border-color: var(--pink-300);
+  &:hover .checkbox__box {
+    border-color: var(--pink-300, #e8a0bc);
+  }
+
+  &.isDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .checkbox__box {
+      background: #f0e8ec;
+      border-color: #d0c4ca;
+    }
   }
 
   &__box {
@@ -33,11 +43,16 @@
     border-radius: 8px;
     display: grid;
     place-items: center;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line, #e2d0d8);
     background: #fff;
     color: transparent;
     font-size: 15px;
     font-weight: 900;
     transition: 0.16s ease;
   }
+}
+
+.controlLabel {
+  font-size: 15px;
+  line-height: 1.4;
 }

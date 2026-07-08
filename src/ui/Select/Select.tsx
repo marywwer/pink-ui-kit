@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -48,11 +48,11 @@ export function Select({
   return (
     <div
       ref={rootRef}
-      className={`select-field custom-select ${disabled ? "is-disabled" : ""}`}
+      className={`${styles.selectField} ${styles.customSelect} ${disabled ? styles.isDisabled : ""}`}
     >
-      <span className="field__label">{label}</span>
+      <span className={styles.field__label}>{label}</span>
       <button
-        className={`custom-select__button ${open ? "is-open" : ""}`}
+        className={`${styles.customSelect__button} ${open ? styles.isOpen : ""}`}
         type="button"
         disabled={disabled}
         aria-haspopup="listbox"
@@ -60,15 +60,15 @@ export function Select({
         onClick={() => setOpen((current) => !current)}
       >
         <span>{selectedOption.label}</span>
-        <span className="custom-select__chevron" aria-hidden="true" />
+        <span className={styles.customSelect__chevron} aria-hidden="true" />
       </button>
 
       {open && !disabled && (
-        <div className="custom-select__dropdown" role="listbox">
+        <div className={styles.customSelect__dropdown} role="listbox">
           {options.map((option) => (
             <button
               key={option.value}
-              className={`custom-select__option ${option.value === value ? "is-selected" : ""}`}
+              className={`${styles.customSelect__option} ${option.value === value ? styles.isSelected : ""}`}
               type="button"
               role="option"
               aria-selected={option.value === value}

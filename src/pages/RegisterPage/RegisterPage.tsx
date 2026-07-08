@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar } from '../../ui/Avatar/Avatar';
-import { Button } from '../../ui/Button/Button';
-import { Input } from '../../ui/Input/Input';
-import { Snackbar } from '../../ui/Snackbar/Snackbar';
+import { Avatar } from '../../ui/Avatar';
+import { Button } from '../../ui/Button';
+import { Input } from '../../ui/Input';
+import { Snackbar } from '../../ui/Snackbar';
 import { useAuth } from '../../store/auth/AuthContext';
-import './RegisterPage.scss';
+import styles from './Styles.module.scss';
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
@@ -39,13 +39,13 @@ export const RegisterPage = () => {
   };
 
   return (
-    <main className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <div className="auth-card__avatar">
+    <main className={styles.authPage}>
+      <form className={styles.authCard} onSubmit={handleSubmit}>
+        <div className={styles.avatar}>
           <Avatar name={name || 'Pink Market'} size="lg" />
         </div>
 
-        <div className="auth-card__header">
+        <div className={styles.header}>
           <h1>Регистрация</h1>
           <p>Создаём аккаунт для будущей корзины, лайков и прочего разврата</p>
         </div>
@@ -81,11 +81,13 @@ export const RegisterPage = () => {
           autoComplete="new-password"
         />
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Создаём...' : 'Зарегистрироваться'}
-        </Button>
+        <div className={styles.buttonWrap}>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Создаём...' : 'Зарегистрироваться'}
+          </Button>
+        </div>
 
-        <p className="auth-card__footer">
+        <p className={styles.footer}>
           Уже есть аккаунт? <Link to="/login">Войти</Link>
         </p>
       </form>

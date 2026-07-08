@@ -1,0 +1,66 @@
+.authPage {
+  min-height: 100vh;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authCard {
+  width: min(430px, 100%);
+  padding: 36px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(128, 32, 72, 0.18);
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.header {
+  margin-bottom: 28px;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+    line-height: 1.1;
+  }
+
+  p {
+    margin: 0;
+    color: #7d5265;
+    line-height: 1.5;
+  }
+}
+
+.footer {
+  margin: 22px 0 0;
+  text-align: center;
+
+  a {
+    color: #b83268;
+    font-weight: 800;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(217, 67, 122, 0.32);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-.snackbar-stack {
+.snackbarStack {
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -25,13 +25,13 @@
     opacity 0.22s ease,
     transform 0.22s ease;
 
-  &.is-open {
+  &.isOpen {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
 
-  &.is-leaving {
+  &.isLeaving {
     transform: translateY(10px);
     opacity: 0;
   }
@@ -65,7 +65,7 @@
 }
 
 @media (max-width: 760px) {
-  .snackbar-stack {
+  .snackbarStack {
     left: 12px;
     right: 12px;
     bottom: 12px;

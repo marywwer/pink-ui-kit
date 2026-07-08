@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from "react";
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -26,15 +26,15 @@ export function Input({
 
   return (
     <label
-      className={`field ${disabled ? "is-disabled" : ""}`}
+      className={`${styles.field} ${disabled ? styles.isDisabled : ""}`}
       htmlFor={inputId}
     >
-      <span className="field__label">{label}</span>
+      <span className={styles.field__label}>{label}</span>
 
       <input
         {...props}
         id={inputId}
-        className="field__input"
+        className={styles.field__input}
         type={type}
         value={value}
         placeholder={placeholder}
@@ -42,7 +42,9 @@ export function Input({
         onChange={(event) => onChange(event.target.value)}
       />
 
-      {helperText && <small className="field__helper">{helperText}</small>}
+      {helperText && (
+        <small className={styles.field__helper}>{helperText}</small>
+      )}
     </label>
   );
 }

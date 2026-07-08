@@ -1,4 +1,4 @@
-import "./Styles.module.scss";
+import styles from "./Styles.module.scss";
 
 type CheckCircleProps = {
   checked: boolean;
@@ -15,7 +15,7 @@ export function CheckCircle({
 }: CheckCircleProps) {
   return (
     <button
-      className={`check-circle ${checked ? "is-checked" : ""}`}
+      className={`${styles.checkCircle} ${checked ? styles.isChecked : ""}`}
       disabled={disabled}
       onClick={() => onChange(!checked)}
       type="button"

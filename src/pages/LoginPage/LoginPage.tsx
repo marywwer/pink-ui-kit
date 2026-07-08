@@ -1,11 +1,11 @@
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../ui/Button/Button";
-import { Input } from "../../ui/Input/Input";
-import { Checkbox } from "../../ui/Checkbox/Checkbox";
-import { Snackbar } from "../../ui/Snackbar/Snackbar";
+import { Button } from "../../ui/Button";
+import { Input } from "../../ui/Input";
+import { Checkbox } from "../../ui/Checkbox";
+import { Snackbar } from "../../ui/Snackbar";
 import { useAuth } from "../../store/auth/AuthContext";
-import "./LoginPage.scss";
+import styles from "./Styles.module.scss";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -39,9 +39,9 @@ export const LoginPage = () => {
   };
 
   return (
-    <main className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <div className="auth-card__header">
+    <main className={styles.authPage}>
+      <form className={styles.authCard} onSubmit={handleSubmit}>
+        <div className={styles.header}>
           <h1>Вход</h1>
           <p>Вернись в свой розовый потребительский рай</p>
         </div>
@@ -72,11 +72,13 @@ export const LoginPage = () => {
           onChange={setRemember}
         />
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Входим..." : "Войти"}
-        </Button>
+        <div className={styles.buttonWrap}>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Входим..." : "Войти"}
+          </Button>
+        </div>
 
-        <p className="auth-card__footer">
+        <p className={styles.footer}>
           Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
         </p>
       </form>

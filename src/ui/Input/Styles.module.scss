@@ -3,6 +3,11 @@
   gap: 8px;
   margin: 12px 0;
 
+  &.isDisabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   &__label {
     font-size: 13px;
     font-weight: 800;
@@ -14,8 +19,8 @@
     min-height: 46px;
     padding: 0 14px;
     border-radius: 15px;
-    border: 1px solid var(--line);
-    color: var(--text);
+    border: 1px solid var(--line, #e2d0d8);
+    color: var(--text, #1a1a1a);
     background: #fff;
     transition:
       border-color 0.16s ease,
@@ -23,13 +28,13 @@
       background 0.16s ease;
 
     &:hover:not(:disabled) {
-      border-color: var(--pink-300);
+      border-color: var(--pink-300, #e8a0bc);
     }
 
     &:focus {
       outline: none;
-      border-color: var(--pink-500);
-      box-shadow: var(--focus);
+      border-color: var(--pink-500, #d9437a);
+      box-shadow: var(--focus, 0 0 0 3px rgba(217, 67, 122, 0.3));
     }
 
     &:disabled {
@@ -39,7 +44,7 @@
   }
 
   &__helper {
-    color: var(--muted);
+    color: var(--muted, #7d5265);
     line-height: 1.4;
   }
 }
