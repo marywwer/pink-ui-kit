@@ -1,10 +1,13 @@
-import { AuthResponse, User } from '../../store/auth/authTypes';
+import { AuthResponse, User } from "../../store/auth/authTypes";
 
 type StoredUser = User & {
   password: string;
 };
 
-const USERS_KEY = 'pink-shop-users';
+const USERS_KEY = "pink-shop-users";
+
+const ADMIN_EMAIL = "admin@fleur.ru";
+const ADMIN_PASSWORD = "admin123";
 
 const getUsers = (): StoredUser[] => {
   const users = localStorage.getItem(USERS_KEY);
@@ -22,7 +25,11 @@ const createToken = () => {
 const delay = (ms = 500) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const mockAuthApi = {
-  async register(name: string, email: string, password: string): Promise<AuthResponse> {
+  async register(
+    name: string,
+    email: string,
+    password: string,
+  ): Promise<AuthResponse> {
     await delay();
 
     const users = getUsers();
@@ -30,7 +37,7 @@ export const mockAuthApi = {
     const existingUser = users.find((user) => user.email === email);
 
     if (existingUser) {
-      throw new Error('Пользователь с таким email уже существует');
+      throw new Error("Пользователь с таким email уже существует");
     }
 
     const newUser: StoredUser = {
@@ -38,7 +45,7 @@ export const mockAuthApi = {
       name,
       email,
       password,
-      role: 'user',
+      role: "user",
     };
 
     saveUsers([...users, newUser]);
@@ -54,14 +61,26 @@ export const mockAuthApi = {
   async login(email: string, password: string): Promise<AuthResponse> {
     await delay();
 
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      return {
+        user: {
+          id: "admin",
+          name: "Администратор",
+          email: ADMIN_EMAIL,
+          role: "admin",
+        },
+        token: createToken(),
+      };
+    }
+
     const users = getUsers();
 
     const foundUser = users.find(
-      (user) => user.email === email && user.password === password
+      (user) => user.email === email && user.password === password,
     );
 
     if (!foundUser) {
-      throw new Error('Неверный email или пароль');
+      throw new Error("Неверный email или пароль");
     }
 
     const { password: _, ...userWithoutPassword } = foundUser;

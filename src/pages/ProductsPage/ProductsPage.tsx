@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  Product,
-  ProductCategory,
-} from '../../entities/product/types';
-import { mockProductsApi } from '../../shared/api/mockProductsApi';
-import { Header } from '../../widgets/Header/Header';
-import { ProductCard } from '../../widgets/ProductCard/ProductCard';
-import { Input } from '../../ui/Input/Input';
-import { Select } from '../../ui/Select/Select';
-import { Toggle } from '../../ui/Toggle/Toggle';
-import { Snackbar } from '../../ui/Snackbar/Snackbar';
-import styles from './Styles.module.scss';
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Product, ProductCategory } from "../../entities/product/types";
+import { useProductsStore } from "../../store/products/useProductsStore";
+import { mockProductsApi } from "../../shared/api/mockProductsApi";
+import { Header } from "../../widgets/Header/Header";
+import { ProductCard } from "../../widgets/ProductCard/ProductCard";
+import { Input } from "../../ui/Input/Input";
+import { Select } from "../../ui/Select/Select";
+import { Toggle } from "../../ui/Toggle/Toggle";
+import { Snackbar } from "../../ui/Snackbar/Snackbar";
+import styles from "./Styles.module.scss";
 
-type CategoryFilter = ProductCategory | 'all';
+type CategoryFilter = ProductCategory | "all";
 
 type SnackbarItem = {
   id: number;
@@ -26,17 +24,16 @@ export const ProductsPage = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState<Product[]>([]);
-  const [search, setSearch] = useState('');
-  const [category, setCategory] =
-    useState<CategoryFilter>('all');
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<CategoryFilter>("all");
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [snackbarItems, setSnackbarItems] = useState<
-    SnackbarItem[]
-  >([]);
+  const [snackbarItems, setSnackbarItems] = useState<SnackbarItem[]>([]);
 
   const redirectTimeoutRef = useRef<number | null>(null);
+
+  const storeProducts = useProductsStore((state) => state.products);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -56,7 +53,7 @@ export const ProductsPage = () => {
     };
 
     loadProducts();
-  }, [search, category, onlyAvailable]);
+  }, [search, category, onlyAvailable, storeProducts]);
 
   useEffect(() => {
     return () => {
@@ -67,9 +64,7 @@ export const ProductsPage = () => {
   }, []);
 
   const handleCloseSnackbar = (id: number) => {
-    setSnackbarItems((items) =>
-      items.filter((item) => item.id !== id),
-    );
+    setSnackbarItems((items) => items.filter((item) => item.id !== id));
   };
 
   const handleRequireAuth = () => {
@@ -78,9 +73,8 @@ export const ProductsPage = () => {
     setSnackbarItems([
       {
         id: snackbarId,
-        title: 'Требуется авторизация',
-        message:
-          'Для корзины и избранного необходимо войти',
+        title: "Требуется авторизация",
+        message: "Для корзины и избранного необходимо войти",
       },
     ]);
 
@@ -90,7 +84,7 @@ export const ProductsPage = () => {
 
     redirectTimeoutRef.current = window.setTimeout(() => {
       setSnackbarItems([]);
-      navigate('/login');
+      navigate("/login");
     }, 1200);
   };
 
@@ -105,8 +99,7 @@ export const ProductsPage = () => {
           <h1>Букеты и цветочные композиции</h1>
 
           <span>
-            Найдите букет для праздника, признания или просто
-            хорошего дня.
+            Найдите букет для праздника, признания или просто хорошего дня.
           </span>
         </header>
 
@@ -124,33 +117,31 @@ export const ProductsPage = () => {
             <Select
               label="Категория"
               value={category}
-              onChange={(value) =>
-                setCategory(value as CategoryFilter)
-              }
+              onChange={(value) => setCategory(value as CategoryFilter)}
               options={[
                 {
-                  value: 'all',
-                  label: 'Все букеты',
+                  value: "all",
+                  label: "Все букеты",
                 },
                 {
-                  value: 'roses',
-                  label: 'Розы',
+                  value: "roses",
+                  label: "Розы",
                 },
                 {
-                  value: 'peonies',
-                  label: 'Пионы',
+                  value: "peonies",
+                  label: "Пионы",
                 },
                 {
-                  value: 'tulips',
-                  label: 'Тюльпаны',
+                  value: "tulips",
+                  label: "Тюльпаны",
                 },
                 {
-                  value: 'mixed',
-                  label: 'Сборные букеты',
+                  value: "mixed",
+                  label: "Сборные букеты",
                 },
                 {
-                  value: 'plants',
-                  label: 'Растения',
+                  value: "plants",
+                  label: "Растения",
                 },
               ]}
             />
@@ -166,14 +157,11 @@ export const ProductsPage = () => {
         </section>
 
         <div className={styles.result}>
-          Найдено товаров:{' '}
-          <strong>{products.length}</strong>
+          Найдено товаров: <strong>{products.length}</strong>
         </div>
 
         {isLoading ? (
-          <p className={styles.message}>
-            Загружаем каталог...
-          </p>
+          <p className={styles.message}>Загружаем каталог...</p>
         ) : products.length > 0 ? (
           <section className={styles.grid}>
             {products.map((product) => (
@@ -191,10 +179,7 @@ export const ProductsPage = () => {
         )}
       </main>
 
-      <Snackbar
-        items={snackbarItems}
-        onClose={handleCloseSnackbar}
-      />
+      <Snackbar items={snackbarItems} onClose={handleCloseSnackbar} />
     </>
   );
 };

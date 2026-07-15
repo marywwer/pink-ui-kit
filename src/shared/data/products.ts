@@ -4,10 +4,11 @@ export const products: Product[] = [
   {
     id: 'pink-cloud',
     title: 'Розовое облако',
-    description: 'Воздушный букет из розовых роз, эустомы и нежной зелени.',
+    description:
+      'Воздушный букет из розовых роз, эустомы и нежной зелени.',
     price: 4590,
     oldPrice: 5190,
-    image: '../../../public/images/products/pink_cloud_flowers.jpg',
+    image: '/images/products/pink_cloud_flowers.jpg',
     category: 'roses',
     rating: 4.9,
     reviewsCount: 38,
@@ -17,9 +18,10 @@ export const products: Product[] = [
   {
     id: 'peony-morning',
     title: 'Пионовое утро',
-    description: 'Нежный сезонный букет с пионами в молочно-розовой гамме.',
+    description:
+      'Нежный сезонный букет с пионами в молочно-розовой гамме.',
     price: 5890,
-    image: '../../../public/images/products/peony_morning_flowers.jpg',
+    image: '/images/products/peony_morning_flowers.jpg',
     category: 'peonies',
     rating: 5,
     reviewsCount: 24,
@@ -29,9 +31,10 @@ export const products: Product[] = [
   {
     id: 'spring-letter',
     title: 'Весеннее письмо',
-    description: 'Яркие тюльпаны для тех, кто соскучился по весне.',
+    description:
+      'Яркие тюльпаны для тех, кто соскучился по весне.',
     price: 2990,
-    image: '../../../public/images/products/spring_letter_flowers.jpg',
+    image: '/images/products/spring_letter_flowers.jpg',
     category: 'tulips',
     rating: 4.8,
     reviewsCount: 17,
@@ -40,9 +43,10 @@ export const products: Product[] = [
   {
     id: 'berry-dessert',
     title: 'Ягодный десерт',
-    description: 'Сборный букет с выразительными ягодными оттенками.',
+    description:
+      'Сборный букет с выразительными ягодными оттенками.',
     price: 3990,
-    image: '../../../public/images/products/berry_dessert_flowers.jpg',
+    image: '/images/products/berry_dessert_flowers.jpg',
     category: 'mixed',
     rating: 4.7,
     reviewsCount: 31,
@@ -52,9 +56,10 @@ export const products: Product[] = [
   {
     id: 'white-pearl',
     title: 'Белая жемчужина',
-    description: 'Светлый минималистичный букет для особенного события.',
+    description:
+      'Светлый минималистичный букет для особенного события.',
     price: 4290,
-    image: '../../../public/images/products/white_pearl_flowers.jpg',
+    image: '/images/products/white_pearl_flowers.jpg',
     category: 'mixed',
     rating: 4.9,
     reviewsCount: 19,
@@ -63,9 +68,10 @@ export const products: Product[] = [
   {
     id: 'home-garden',
     title: 'Домашний сад',
-    description: 'Композиция из живых растений в декоративном кашпо.',
+    description:
+      'Композиция из живых растений в декоративном кашпо.',
     price: 3490,
-    image: '../../../public/images/products/home_garden_flowers.jpg',
+    image: '/images/products/home_garden_flowers.jpg',
     category: 'plants',
     rating: 4.6,
     reviewsCount: 12,

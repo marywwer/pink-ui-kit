@@ -41,17 +41,41 @@ export const Header = () => {
             Букеты
           </NavLink>
 
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
-            Корзина
-            {cartCount > 0 && (
-              <span className={styles.cartCount}>{cartCount}</span>
-            )}
-          </NavLink>
+          {isAuth && (
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
+            >
+              Избранное
+            </NavLink>
+          )}
+
+          {isAuth && (
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
+            >
+              Корзина
+              {cartCount > 0 && (
+                <span className={styles.cartCount}>{cartCount}</span>
+              )}
+            </NavLink>
+          )}
+
+          {user?.role === "admin" && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.link
+              }
+            >
+              Администрирование
+            </NavLink>
+          )}
         </nav>
 
         <div className={styles.account}>

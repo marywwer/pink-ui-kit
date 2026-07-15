@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Product } from "../../entities/product/types";
 import { Button } from "../../ui/Button/Button";
 import { Tooltip } from "../../ui/Tooltip/Tooltip";
@@ -41,11 +42,17 @@ export const ProductCard = ({ product, onRequireAuth }: ProductCardProps) => {
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
         <div className={styles.imageClip}>
-          <img
-            className={styles.image}
-            src={product.image}
-            alt={product.title}
-          />
+          <Link
+            className={styles.imageLink}
+            to={`/products/${product.id}`}
+            aria-label={`Открыть товар ${product.title}`}
+          >
+            <img
+              className={styles.image}
+              src={product.image}
+              alt={product.title}
+            />
+          </Link>
         </div>
 
         <div className={styles.badges}>
@@ -81,10 +88,20 @@ export const ProductCard = ({ product, onRequireAuth }: ProductCardProps) => {
       <div className={styles.content}>
         <div className={styles.rating}>
           <span>★ {product.rating}</span>
-          <span>{product.reviewsCount} отзывов</span>
+          <Link
+            className={styles.reviewsLink}
+            to={`/products/${product.id}#reviews`}
+          >
+            {product.reviewsCount} отзывов
+          </Link>
         </div>
 
-        <h3>{product.title}</h3>
+        <Link
+          className={styles.titleLink}
+          to={`/products/${product.id}`}
+        >
+          <h3>{product.title}</h3>
+        </Link>
 
         <p className={styles.description}>{product.description}</p>
 

@@ -152,3 +152,52 @@
     font-size: 12px;
   }
 }
+
+.imageLink {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  &:focus-visible {
+    outline: 4px solid rgba(200, 63, 117, 0.36);
+    outline-offset: -5px;
+  }
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+
+  h3 {
+    transition: color 180ms ease;
+  }
+
+  &:hover h3 {
+    color: #ad3261;
+  }
+
+  &:focus-visible {
+    border-radius: 6px;
+    outline: 3px solid rgba(200, 63, 117, 0.25);
+    outline-offset: 4px;
+  }
+}
+
+.reviewsLink {
+  color: #9a6c7d;
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 180ms ease;
+
+  &:hover {
+    color: #a72f5e;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  &:focus-visible {
+    border-radius: 5px;
+    outline: 3px solid rgba(200, 63, 117, 0.25);
+    outline-offset: 3px;
+  }
+}
