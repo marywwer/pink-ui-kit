@@ -1,11 +1,13 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
-  useCallback,
 } from 'react';
+
 import { mockAuthApi } from '../../shared/api/mockAuthApi';
 import { User } from './authTypes';
 
@@ -13,74 +15,204 @@ type AuthContextValue = {
   user: User | null;
   token: string | null;
   isAuth: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
+  isAuthLoading: boolean;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<void>;
+  register: (
+    name: string,
+    email: string,
+    password: string
+  ) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+const AuthContext =
+  createContext<AuthContextValue | null>(null);
 
 const TOKEN_KEY = 'pink-shop-token';
 const USER_KEY = 'pink-shop-user';
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() => {
-    return localStorage.getItem(TOKEN_KEY);
+const AUTH_TRANSITION_DELAY = 700;
+const INITIAL_LOADING_DELAY = 500;
+
+const delay = (ms: number) => {
+  return new Promise<void>((resolve) => {
+    window.setTimeout(resolve, ms);
   });
-  
-  const [user, setUser] = useState<User | null>(() => {
-    const savedUser = localStorage.getItem(USER_KEY);
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
+};
 
-  const login = useCallback(async (email: string, password: string) => {
-    const response = await mockAuthApi.login(email, password);
+export const AuthProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [token, setToken] =
+    useState<string | null>(null);
 
-    setToken(response.token);
-    setUser(response.user);
+  const [user, setUser] =
+    useState<User | null>(null);
 
-    localStorage.setItem(TOKEN_KEY, response.token);
-    localStorage.setItem(USER_KEY, JSON.stringify(response.user));
+  const [isAuthLoading, setIsAuthLoading] =
+    useState(true);
+
+  useEffect(() => {
+    const restoreAuth = async () => {
+      try {
+        const savedToken =
+          localStorage.getItem(TOKEN_KEY);
+
+        const savedUser =
+          localStorage.getItem(USER_KEY);
+
+        await delay(INITIAL_LOADING_DELAY);
+
+        if (!savedToken || !savedUser) {
+          return;
+        }
+
+        const parsedUser =
+          JSON.parse(savedUser) as User;
+
+        setToken(savedToken);
+        setUser(parsedUser);
+      } catch {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
+
+        setToken(null);
+        setUser(null);
+      } finally {
+        setIsAuthLoading(false);
+      }
+    };
+
+    void restoreAuth();
   }, []);
 
-  const register = useCallback(async (name: string, email: string, password: string) => {
-    const response = await mockAuthApi.register(name, email, password);
+  const login = useCallback(
+    async (
+      email: string,
+      password: string
+    ) => {
+      setIsAuthLoading(true);
 
-    setToken(response.token);
-    setUser(response.user);
+      try {
+        const response =
+          await mockAuthApi.login(
+            email,
+            password
+          );
 
-    localStorage.setItem(TOKEN_KEY, response.token);
-    localStorage.setItem(USER_KEY, JSON.stringify(response.user));
+        localStorage.setItem(
+          TOKEN_KEY,
+          response.token
+        );
+
+        localStorage.setItem(
+          USER_KEY,
+          JSON.stringify(response.user)
+        );
+
+        setToken(response.token);
+        setUser(response.user);
+
+        await delay(AUTH_TRANSITION_DELAY);
+      } finally {
+        setIsAuthLoading(false);
+      }
+    },
+    []
+  );
+
+  const register = useCallback(
+    async (
+      name: string,
+      email: string,
+      password: string
+    ) => {
+      setIsAuthLoading(true);
+
+      try {
+        const response =
+          await mockAuthApi.register(
+            name,
+            email,
+            password
+          );
+
+        localStorage.setItem(
+          TOKEN_KEY,
+          response.token
+        );
+
+        localStorage.setItem(
+          USER_KEY,
+          JSON.stringify(response.user)
+        );
+
+        setToken(response.token);
+        setUser(response.user);
+
+        await delay(AUTH_TRANSITION_DELAY);
+      } finally {
+        setIsAuthLoading(false);
+      }
+    },
+    []
+  );
+
+  const logout = useCallback(async () => {
+    setIsAuthLoading(true);
+
+    try {
+      await delay(AUTH_TRANSITION_DELAY);
+
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+
+      setToken(null);
+      setUser(null);
+    } finally {
+      setIsAuthLoading(false);
+    }
   }, []);
 
-  const logout = useCallback(() => {
-    setToken(null);
-    setUser(null);
-
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
-  }, []);
-
-  const value = useMemo(
+  const value = useMemo<AuthContextValue>(
     () => ({
       user,
       token,
       isAuth: Boolean(token && user),
+      isAuthLoading,
       login,
       register,
       logout,
     }),
-    [user, token, login, register, logout]
+    [
+      user,
+      token,
+      isAuthLoading,
+      login,
+      register,
+      logout,
+    ]
   );
 
-  return <AuthContext value={value}>{children}</AuthContext>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth должен использоваться внутри AuthProvider');
+    throw new Error(
+      'useAuth должен использоваться внутри AuthProvider'
+    );
   }
 
   return context;

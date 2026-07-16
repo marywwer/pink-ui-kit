@@ -42,7 +42,7 @@ export const RegisterPage = () => {
     <main className={styles.authPage}>
       <form className={styles.authCard} onSubmit={handleSubmit}>
         <div className={styles.avatar}>
-          <Avatar name={name || 'Pink Market'} size="lg" />
+          <Avatar name={name || 'Fleur'} size="lg" />
         </div>
 
         <div className={styles.header}>

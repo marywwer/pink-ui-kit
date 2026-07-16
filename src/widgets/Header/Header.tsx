@@ -15,6 +15,10 @@ export const Header = () => {
   const userName = user?.name || "Пользователь";
   const userEmail = user?.email || "";
 
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -88,7 +92,7 @@ export const Header = () => {
                 </div>
               </Tooltip>
 
-              <Button variant="secondary" type="button" onClick={logout}>
+              <Button variant="secondary" type="button" onClick={handleLogout}>
                 Выйти
               </Button>
             </>

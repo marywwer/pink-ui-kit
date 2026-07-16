@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { LoaderPage } from "../pages/LoaderPage/LoaderPage";
 import { HomePage } from "../pages/HomePage/HomePage";
 import { ProductsPage } from "../pages/ProductsPage/ProductsPage";
 import { CartPage } from "../pages/CartPage/CartPage";
@@ -9,11 +10,19 @@ import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
 import { ProductPage } from "../pages/ProductPage/ProductPage";
 
+import { useAuth } from "../store/auth/AuthContext";
+
 import { ProtectedRoute } from "./router/ProtectedRoute";
 import { PublicRoute } from "./router/PublicRoute";
 import { AdminRoute } from "./router/AdminRoute";
 
 export const App = () => {
+  const { isAuthLoading } = useAuth();
+
+  if (isAuthLoading) {
+    return <LoaderPage text="Подготавливаем цветочный магазин..." />;
+  }
+  
   return (
     <BrowserRouter>
       <Routes>
